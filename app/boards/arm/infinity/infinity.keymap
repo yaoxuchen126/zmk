@@ -1,0 +1,78 @@
+/*
+ * Copyright (c) 2021 Nick Winans
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/rgb.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/ext_power.h>
+
+#define DEFAULT 0
+// #define FN 1
+
+	/ {
+		macro {
+			//copy
+			macro_copy: macro_copy {
+				compatible = "zmk,behavior-macro";
+				label = "MACRO_COPY";
+				#binding-cells = <0>;
+				bindings = <&kp LCTRL &kp C>;
+				};
+			};
+		macro {
+			//paste
+			macro_paste: macro_paste {
+				compatible = "zmk,behavior-macro";
+				label = "MACRO_PASTE";
+				#binding-cells = <0>;
+				bindings = <&kp LCTRL &kp V>;
+				};
+			};
+		};
+	
+
+	/ {
+		keymap {
+		compatible = "zmk,keymap";
+		
+		default_layer {
+
+			bindings = <
+	&kp C_MUTE       &kp ESC    &kp N1     &kp N2      &kp N3     &kp N4     &kp N5      &kp N6      &kp N7
+	&macro_copy      &kp TAB    &kp Q      &kp W       &kp E      &kp R      &kp T       &kp Y       &kp
+	&macro_paste     &kp CLCK   &kp A      &kp S       &kp D      &kp F      &kp G       &kp H       &kp J
+	&kp BSPC         &kp LSHFT  &kp Z      &kp X       &kp C      &kp V      &kp B       &kp N       &kp M
+	&kp DEL          &kp LCTRL  &kp LGUI   &kp LALT                          &kp SPACE
+	&kp N8           &kp N9     &kp N0     &kp MINUS   &kp EQUAL  &kp BSPC   &kp KP_NLCK &kp KP_PLUS &kp KP_MINUS
+	&kp I            &kp O      &kp P      &kp LBKT    &kp RBKT   &kp BSLH   &kp KP_N7   &kp KP_N8   &kp KP_N9
+	&kp K            &kp L      &kp SEMI   &kp SQT     &kp ENTER             &kp KP_N4   &kp KP_N5   &kp KP_N6
+    &kp COMMA        &kp DOT    &kp SLASH  &kp RSHIFT  &kp UP                &kp KP_N1   &kp KP_N2   &kp KP_N3
+	&kp RALT         &mo 1      &kp RCTRL  &kp LEFT    &kp DOWN              &kp RIGHT   &kp KP_N0   &kp KP_DOT
+
+				>;
+					sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
+			};
+
+		fn_layer {
+
+			bindings = <
+	&reset                &rgb_ug RGB_TOG   &kp F1        &kp F2            &kp F3          &kp F4        &kp F5           &kp F6           &kp F7
+	&kp C_AL_CALC         &kp TAB           &bt BT_SEL 0  &bt BT_SEL 1      &bt BT_SEL 2    &bt BT_SEL 3  &bt BT_SEL 4     &kp Y            &kp U 
+	&kp C_AL_MY_COMPUTER  &kp CLCK          &kp A         &kp S             &kp D           &kp F         &kp G            &kp H            &kp J
+	&bt BT_NXT            &kp LSHFT         &kp Z         &kp X             &bt BT_CLR      &kp V         &kp B            &kp N            &kp M
+	&bt BT_PRV            &kp LCTRL         &kp LGUI      &kp LALT                                        &kp SPACE
+	&kp F8                &kp F9            &kp F10       &kp F11           &kp F12         &kp BSPC      &kp KP_NLCK      &kp KP_ASTERISK  &kp KP_SLASH
+	&kp I                 &kp O             &kp P         &kp LBKT          &kp RBKT        &kp BSLH      &kp KP_N7        &kp KP_N8        &kp KP_N9
+	&kp K                 &kp L             &kp SEMI      &kp SQT           &kp ENTER                     &kp KP_N4        &kp KP_N5        &kp KP_N6
+    &kp COMMA             &kp DOT           &kp SLASH     &kp RSHIFT        &rgb_ug RGB_BRI               &kp KP_N1        &kp KP_N2        &kp KP_N3
+	&kp RALT              &mo 1             &kp RCTRL     &rgb_ug RGB_EFF   &rgb_ug RGB_BRD               &rgb_ug RGB_EFR  &kp KP_N0        &kp KP_DOT
+				>;
+					sensor-bindings = <&inc_dec_kp PG_DN PG_UP>;
+			};
+		};
+	};
